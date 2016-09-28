@@ -1,0 +1,58 @@
+﻿<Page
+    x:Class="App2.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:triggers="using:WindowsStateTriggers"
+    xmlns:mytrigger="using:MyAdaptiveTrigger"
+    mc:Ignorable="d">
+
+    <Grid Background="AliceBlue" x:Name="gridRoot">
+
+        <VisualStateManager.VisualStateGroups>
+
+            <VisualStateGroup >
+                <VisualState x:Name="narrow">
+                    <VisualState.StateTriggers>
+                        <triggers:CompositeStateTrigger Operator="And">
+                            <mytrigger:AdaptiveTrigger MinWindowWidth="0" MaxWindowHeight="520" />
+                            <triggers:DeviceFamilyStateTrigger DeviceFamily="Desktop" />
+                        </triggers:CompositeStateTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="textBlock.Text" Value="Desktop is narrow" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="medium">
+                    <VisualState.StateTriggers>
+                        <triggers:CompositeStateTrigger Operator="And">
+                            <mytrigger:AdaptiveTrigger MinWindowWidth="521" MaxWindowHeight="1199" />
+                            <triggers:DeviceFamilyStateTrigger DeviceFamily="Desktop" />
+                        </triggers:CompositeStateTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="textBlock.Text" Value="Desktop is medium width" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="wide">
+                    <VisualState.StateTriggers>
+                        <triggers:CompositeStateTrigger Operator="And">
+                            <mytrigger:AdaptiveTrigger MinWindowWidth="1200"/>
+                            <triggers:DeviceFamilyStateTrigger DeviceFamily="Desktop" />
+                        </triggers:CompositeStateTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="textBlock.Text" Value="Desktop is wide" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid x:Name="gridText">
+            <TextBlock x:Name="textBlock" FontSize="40" Text="My Text Block" Style="{StaticResource HeaderTextBlockStyle}" FontWeight="ExtraBold"/>
+        </Grid>
+
+    </Grid>
+</Page>
